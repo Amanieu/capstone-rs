@@ -12,7 +12,7 @@ pub struct Capstone {
 impl Capstone {
     pub fn new(arch: CsArch, mode: CsMode) -> Option<Capstone> {
         let mut handle: libc::size_t = 0;
-        if let CsErr::CS_ERR_OK = unsafe { cs_open(arch, mode, &mut handle) } {
+        if let CsErr::CS_ERR_OK = unsafe { cs_open(arch, mode.bits(), &mut handle) } {
             Some(Capstone {
                 csh: handle
             })

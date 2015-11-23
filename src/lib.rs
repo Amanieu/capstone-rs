@@ -1,4 +1,6 @@
 extern crate libc;
+#[macro_use]
+extern crate bitflags;
 
 pub mod instruction;
 pub mod constants;
@@ -28,7 +30,7 @@ mod test {
     #[test]
     fn test_x86_simple() {
     match capstone::Capstone::new(constants::CsArch::ARCH_X86,
-                                  constants::CsMode::MODE_64) {
+                                  constants::CS_MODE_64) {
         Some(cs) => {
             if let Some(insns) = cs.disasm(CODE, 0x1000, 0) {
                 assert_eq!(insns.len(), 2);
